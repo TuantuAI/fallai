@@ -1,0 +1,73 @@
+.venv/
+.idea/
+__pycache__/
+*.py[cod]
+.env
+data/app.db*
+data/img/*.jpg
+data/raw/*
+data/seq/*.npz
+data/*.json
+mdl/*.pt
+mdl/*_openvino_model/
+cert/*.pem
+!data/raw/.gitkeep
+!data/seq/.gitkeep
+!data/img/.gitkeep
+!mdl/.gitkeep
+!cert/.gitkeep
+# Bien moi truong va thong tin bi mat
+.env
+.env.local
+*.pem
+*.key
+*-key.pem
+
+# Moi truong Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Du lieu ca nhan va du lieu huan luyen
+data/raw/
+data/tapo_raw/
+data/seq/
+data/seq_tapo/
+data/seq_mix_tapo/
+data/events/
+data/img/
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Ket qua tam va ban sao luu
+backups/
+runs/
+logs/
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# He thong
+Thumbs.db
+.DS_Store
+# Toan bo du lieu cuc bo
+data/
+
+# Chung chi HTTPS tao rieng tren may
+cert/
+rootCA.cer
+*.cer
+*.crt
+*.pfx
+*.p12
+
+# Chi dua hai model trien khai len Git
+mdl/*
+!mdl/gru_tapo_blend_095.pt
+!mdl/yolo11n-pose_openvino_model/
+!mdl/yolo11n-pose_openvino_model/**

@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="FallAI - Hệ thống giám sát và cảnh báo té ngã theo thời gian thực">
+  <title>FallAI · Trung tâm giám sát</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l2.3-7 4.1 14 2.4-7H21"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7h3l1.5-2h7L17 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></symbol>
+    <symbol id="i-contact" viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 21h16"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 9a7 7 0 0 1 11.4-2.5L20 9M4 15l2.5 2.5A7 7 0 0 0 17.9 15"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a15 15 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/><path d="M8 9h8M8 13h5"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9h6v6H9zM9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  </svg>
+
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <section id="authView" class="auth-view">
+    <div class="auth-showcase">
+      <a class="brand brand-large" href="#" aria-label="FallAI">
+        <span class="brand-mark"><svg><use href="#i-activity"></use></svg></span>
+        <span><strong>FallAI</strong><small>Smart Fall Detection</small></span>
+      </a>
+      <div class="auth-copy">
+        <span class="overline"><i></i> HỆ THỐNG GIÁM SÁT THỜI GIAN THỰC</span>
+        <h1>An tâm hơn với cảnh báo té ngã thông minh.</h1>
+        <p>Phân tích tư thế bằng YOLO Pose và GRU, ghi nhận sự kiện và gửi cảnh báo SMS ngay khi phát hiện nguy cơ.</p>
+        <div class="feature-list">
+          <div><span><svg><use href="#i-camera"></use></svg></span><p><b>Giám sát trực tiếp</b><small>Phân tích hình ảnh theo thời gian thực</small></p></div>
+          <div><span><svg><use href="#i-chip"></use></svg></span><p><b>AI hai tầng</b><small>YOLO Pose kết hợp mô hình chuỗi GRU</small></p></div>
+          <div><span><svg><use href="#i-message"></use></svg></span><p><b>Cảnh báo tức thời</b><small>Lưu bằng chứng và gửi SMS qua Dcom</small></p></div>
+        </div>
+      </div>
+      <p class="auth-footnote">FallAI · Đồ án phát hiện té ngã bằng trí tuệ nhân tạo</p>
+    </div>
+
+    <div class="auth-form-side">
+      <div class="auth-card">
+        <div class="mobile-auth-brand">
+          <span class="brand-mark"><svg><use href="#i-activity"></use></svg></span>
+          <span><strong>FallAI</strong><small>Smart Fall Detection</small></span>
+        </div>
+        <span class="overline">TRUNG TÂM GIÁM SÁT</span>
+        <h2>Chào mừng trở lại</h2>
+        <p class="auth-intro">Đăng nhập để truy cập hệ thống và theo dõi trạng thái an toàn.</p>
+
+        <div class="auth-tabs" role="tablist" aria-label="Tài khoản">
+          <button class="auth-tab active" type="button" data-auth-tab="login" role="tab">Đăng nhập</button>
+          <button class="auth-tab" type="button" data-auth-tab="register" role="tab">Tạo tài khoản</button>
+        </div>
+
+        <form id="loginForm" class="form-stack">
+          <label><span>Email</span><input name="email" type="email" autocomplete="email" placeholder="name@example.com" required></label>
+          <label><span>Mật khẩu</span><input name="password" type="password" autocomplete="current-password" placeholder="Tối thiểu 8 ký tự" minlength="8" required></label>
+          <button class="button primary wide" type="submit">Đăng nhập <svg><use href="#i-chevron"></use></svg></button>
+        </form>
+
+        <form id="registerForm" class="form-stack hidden">
+          <label><span>Họ và tên</span><input name="name" autocomplete="name" placeholder="Nguyễn Văn A" minlength="2" maxlength="80" required></label>
+          <label><span>Email</span><input name="email" type="email" autocomplete="email" placeholder="name@example.com" required></label>
+          <label><span>Mật khẩu</span><input name="password" type="password" autocomplete="new-password" placeholder="Tối thiểu 8 ký tự" minlength="8" required></label>
+          <button class="button primary wide" type="submit">Tạo tài khoản <svg><use href="#i-chevron"></use></svg></button>
+        </form>
+        <div id="authMsg" class="form-message" role="status"></div>
+        <div class="security-note"><svg><use href="#i-shield"></use></svg><span>Dữ liệu được xử lý cục bộ trên máy chủ của bạn.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="appView" class="app-shell hidden">
+    <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-head">
+        <a class="brand" href="#monitor" aria-label="FallAI">
+          <span class="brand-mark"><svg><use href="#i-activity"></use></svg></span>
+          <span><strong>FallAI</strong><small>Control Center</small></span>
+        </a>
+        <button id="closeMenuBtn" class="icon-button sidebar-close" type="button" aria-label="Đóng menu"><svg><use href="#i-close"></use></svg></button>
+      </div>
+
+      <nav class="main-nav" aria-label="Điều hướng chính">
+        <p class="nav-label">TỔNG QUAN</p>
+        <button class="nav-item active" type="button" data-route="monitor">
+          <svg><use href="#i-camera"></use></svg><span>Giám sát trực tiếp</span><i></i>
+        </button>
+        <button class="nav-item" type="button" data-route="history">
+          <svg><use href="#i-history"></use></svg><span>Lịch sử cảnh báo</span><b id="navEventCount" class="nav-count">0</b>
+        </button>
+        <p class="nav-label">QUẢN LÝ</p>
+        <button class="nav-item" type="button" data-route="contacts">
+          <svg><use href="#i-contact"></use></svg><span>Người nhận SMS</span><i></i>
+        </button>
+        <button class="nav-item" type="button" data-route="system">
+          <svg><use href="#i-settings"></use></svg><span>Hệ thống & tài khoản</span><i></i>
+        </button>
+      </nav>
+
+      <div class="sidebar-health">
+        <div class="health-title"><span>Trạng thái hệ thống</span><span class="live-dot"><i></i> LIVE</span></div>
+        <div class="health-item"><span><i id="poseDot" class="status-dot"></i>YOLO Pose</span><strong id="poseStatus">—</strong></div>
+        <div class="health-item"><span><i id="gruDot" class="status-dot"></i>GRU</span><strong id="gruStatus">—</strong></div>
+        <div class="health-item"><span><i id="smsDot" class="status-dot"></i>Dcom SMS</span><strong id="smsStatus">—</strong></div>
+      </div>
+
+      <div class="sidebar-profile">
+        <div id="userAvatar" class="avatar">FA</div>
+        <div><strong id="sidebarUserName">—</strong><small id="sidebarUserEmail">—</small></div>
+        <button id="sidebarLogoutBtn" class="icon-button" type="button" aria-label="Đăng xuất" title="Đăng xuất"><svg><use href="#i-logout"></use></svg></button>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="workspace-header">
+        <div class="header-title">
+          <button id="menuBtn" class="icon-button menu-button" type="button" aria-label="Mở menu"><svg><use href="#i-menu"></use></svg></button>
+          <div><p id="pageEyebrow">TRUNG TÂM GIÁM SÁT</p><h1 id="pageTitle">Giám sát trực tiếp</h1></div>
+        </div>
+        <div class="header-actions">
+          <div class="server-pill"><span class="status-dot ok"></span><span>Máy chủ đang hoạt động</span></div>
+          <div class="header-user"><span id="userName">—</span><button id="logoutBtn" class="button subtle hidden" type="button"><svg><use href="#i-logout"></use></svg><span>Đăng xuất</span></button></div>
+        </div>
+      </header>
+
+      <main class="workspace-main">
+        <div id="alertBar" class="alert-banner hidden" role="alert">
+          <span class="alert-icon"><svg><use href="#i-bell"></use></svg></span>
+          <div><strong>Phát hiện nguy cơ té ngã</strong><p>Đã lưu sự kiện và chuyển cảnh báo vào hàng đợi SMS.</p></div>
+          <button id="dismissAlertBtn" class="icon-button" type="button" aria-label="Đóng cảnh báo"><svg><use href="#i-close"></use></svg></button>
+        </div>
+
+        <section class="page active" data-page="monitor">
+          <div class="hero-status">
+            <div><span class="overline">AI MONITORING</span><h2>Theo dõi an toàn theo thời gian thực</h2><p>Camera thật được máy chủ quản lý và phân tích liên tục; điện thoại và máy tính chỉ cần mở website để theo dõi.</p></div>
+            <div class="monitor-state"><i id="monitorStateDot"></i><span><small>Trạng thái camera</small><strong id="monitorStateText">Chưa kết nối</strong></span></div>
+          </div>
+
+          <div class="monitor-layout">
+            <section class="card camera-card">
+              <div class="card-head">
+                <div><span class="section-kicker">CAMERA 01</span><h3>Khu vực giám sát chính</h3></div>
+                <div class="button-group">
+                  <button id="startBtn" class="button primary" type="button"><svg><use href="#i-play"></use></svg>Khởi động giám sát</button>
+                  <button id="stopBtn" class="button danger" type="button" disabled><svg><use href="#i-stop"></use></svg>Dừng giám sát</button>
+                  <button id="downloadMetricsBtn" class="button secondary" type="button"><svg><use href="#i-download"></use></svg><span>Xuất CSV</span></button>
+                </div>
+              </div>
+
+              <div class="video-stage">
+                <img id="liveFeed" class="live-feed" alt="Hình ảnh trực tiếp từ camera máy chủ">
+                <div id="videoEmpty" class="video-placeholder">
+                  <span><svg><use href="#i-camera"></use></svg></span>
+                  <strong>Camera máy chủ chưa hoạt động</strong>
+                  <p>Nhấn “Khởi động giám sát” để máy chủ kết nối webcam USB hoặc camera IP.</p>
+                </div>
+                <div class="video-topline">
+                  <span class="recording-indicator"><i></i> LIVE</span>
+                  <span id="obsBadge" class="observation-badge">UNKNOWN</span>
+                </div>
+                <div class="video-caption"><span id="cameraSourceLabel">FallAI Server Camera</span><span><b id="cameraViewerCount">0 người xem</b> · <b id="videoClock">--:--:--</b></span></div>
+              </div>
+              <p id="camMsg" class="inline-message" role="status">Máy chủ sẵn sàng kết nối nguồn camera đã cấu hình.</p>
+            </section>
+
+            <aside class="insight-column">
+              <section class="card result-card">
+                <div class="card-head compact-head"><div><span class="section-kicker">KẾT QUẢ AI</span><h3>Phân tích hiện tại</h3></div><span id="policyBadge" class="soft-badge safe">AN TOÀN</span></div>
+                <div class="primary-result">
+                  <div class="result-icon"><svg><use href="#i-activity"></use></svg></div>
+                  <div><small>Trạng thái hành động</small><strong id="eventLabel">—</strong><span id="eventScore">0%</span></div>
+                </div>
+                <div class="result-grid">
+                  <div><span>Tư thế</span><strong id="posture">—</strong><small id="postureScore">0%</small></div>
+                  <div><span>Keypoint</span><strong id="visible">0/17</strong><small id="observation">—</small></div>
+                  <div><span>AI pipeline</span><strong id="aiMs">0 ms</strong><small id="p95Ms">P95 0 ms</small></div>
+                  <div><span>Chu kỳ xử lý</span><strong id="e2eMs">0 ms</strong><small id="fps">0 FPS</small></div>
+                </div>
+                <div class="model-progress"><div><span>Chuỗi GRU</span><strong id="policy">NORMAL</strong></div><p id="warmup">Cần 24 frame để bắt đầu dự đoán</p></div>
+              </section>
+
+              <section class="card safety-card">
+                <div class="safety-icon"><svg><use href="#i-shield"></use></svg></div>
+                <div><strong>Cơ chế xác nhận an toàn</strong><p>Cảnh báo chỉ được kích hoạt khi AI xác nhận liên tiếp và quan sát đủ keypoint.</p></div>
+              </section>
+            </aside>
+          </div>
+
+          <section class="card recent-card">
+            <div class="card-head">
+              <div><span class="section-kicker">GẦN ĐÂY</span><h3>Cảnh báo mới nhất</h3></div>
+              <button class="text-button" type="button" data-go="history">Xem toàn bộ <svg><use href="#i-chevron"></use></svg></button>
+            </div>
+            <div id="recentEvents" class="recent-events"><div class="empty-state small"><span><svg><use href="#i-history"></use></svg></span><p>Chưa có cảnh báo được ghi nhận.</p></div></div>
+          </section>
+        </section>
+
+        <section class="page" data-page="history">
+          <div class="page-intro"><div><span class="overline">NHẬT KÝ SỰ KIỆN</span><h2>Lịch sử cảnh báo</h2><p>Theo dõi toàn bộ các lần hệ thống phát hiện nguy cơ và trạng thái gửi SMS.</p></div><button id="refreshBtn" class="button secondary" type="button"><svg><use href="#i-refresh"></use></svg>Làm mới dữ liệu</button></div>
+
+          <div class="summary-grid">
+            <article class="summary-card blue"><span><svg><use href="#i-bell"></use></svg></span><div><small>Tổng cảnh báo</small><strong id="totalEvents">0</strong><p>Sự kiện đã lưu</p></div></article>
+            <article class="summary-card violet"><span><svg><use href="#i-history"></use></svg></span><div><small>Cảnh báo hôm nay</small><strong id="todayEvents">0</strong><p>Theo giờ địa phương</p></div></article>
+            <article class="summary-card green"><span><svg><use href="#i-chip"></use></svg></span><div><small>AI trung bình</small><strong id="avgAiMs">0 ms</strong><p>Thời gian xử lý</p></div></article>
+            <article class="summary-card amber"><span><svg><use href="#i-message"></use></svg></span><div><small>SMS thành công</small><strong id="sentSms">0</strong><p>Trong danh sách hiện tại</p></div></article>
+          </div>
+
+          <section class="card history-card">
+            <div class="history-toolbar">
+              <div class="search-box"><svg><use href="#i-eye"></use></svg><input id="historySearch" type="search" placeholder="Tìm theo tư thế, sự kiện, trạng thái SMS…"></div>
+              <select id="historyFilter" aria-label="Lọc lịch sử">
+                <option value="all">Tất cả sự kiện</option>
+                <option value="falling">Đang té</option>
+                <option value="postfall">Sau té ngã</option>
+                <option value="sent">SMS đã gửi</option>
+                <option value="failed">SMS thất bại</option>
+              </select>
+            </div>
+            <div class="table-wrap">
+              <table class="event-table">
+                <thead><tr><th>Thời gian</th><th>Minh chứng</th><th>Phân tích AI</th><th>Độ tin cậy</th><th>Quan sát</th><th>Hiệu năng</th><th>SMS</th></tr></thead>
+                <tbody id="eventRows"><tr><td colspan="7"><div class="empty-state"><span><svg><use href="#i-history"></use></svg></span><strong>Chưa có sự kiện</strong><p>Cảnh báo mới sẽ được hiển thị tại đây.</p></div></td></tr></tbody>
+              </table>
+            </div>
+            <div class="table-footer"><span id="historyCount">Hiển thị 0 sự kiện</span><small>Dữ liệu được lưu cục bộ trong SQLite</small></div>
+          </section>
+        </section>
+
+        <section class="page" data-page="contacts">
+          <div class="page-intro"><div><span class="overline">CẢNH BÁO KHẨN CẤP</span><h2>Người nhận SMS</h2><p>Quản lý người sẽ nhận tin nhắn khi hệ thống xác nhận có nguy cơ té ngã.</p></div></div>
+
+          <div class="settings-layout">
+            <section class="card form-card">
+              <div class="card-head"><div><span class="section-kicker">THÔNG TIN LIÊN HỆ</span><h3>Cấu hình người nhận</h3></div><span id="contactStatusBadge" class="soft-badge muted">CHƯA CẤU HÌNH</span></div>
+              <form id="contactForm" class="settings-form">
+                <label><span>Tên người nhận</span><div class="input-wrap"><svg><use href="#i-user"></use></svg><input name="name" autocomplete="name" placeholder="Ví dụ: Nguyễn Văn A" minlength="2" maxlength="80" required></div><small>Người thân hoặc người phụ trách hỗ trợ.</small></label>
+                <label><span>Số điện thoại</span><div class="input-wrap"><svg><use href="#i-phone"></use></svg><input name="phone" type="tel" autocomplete="tel" placeholder="+849xxxxxxxx" minlength="9" maxlength="20" required></div><small>Nên nhập theo định dạng quốc tế +84.</small></label>
+                <label class="toggle-row"><span><b>Kích hoạt cảnh báo SMS</b><small>Cho phép hệ thống gửi tin nhắn khi phát hiện té ngã.</small></span><input name="enabled" type="checkbox" checked><i></i></label>
+                <div class="form-actions"><button class="button primary" type="submit">Lưu thông tin</button><button id="testSmsBtn" class="button secondary" type="button"><svg><use href="#i-message"></use></svg>Gửi SMS thử</button></div>
+              </form>
+              <div id="contactMsg" class="form-message" role="status"></div>
+            </section>
+
+            <aside class="settings-side">
+              <section class="card contact-preview">
+                <span class="section-kicker">BẢN XEM TRƯỚC</span>
+                <div class="contact-avatar"><svg><use href="#i-contact"></use></svg></div>
+                <h3 id="contactPreviewName">Chưa có người nhận</h3>
+                <p id="contactPreviewPhone">Thêm số điện thoại để kích hoạt cảnh báo.</p>
+                <div class="contact-preview-status"><span id="contactPreviewDot" class="status-dot"></span><span id="contactPreviewStatus">Chưa kích hoạt</span></div>
+              </section>
+              <section class="card information-card">
+                <span><svg><use href="#i-message"></use></svg></span>
+                <div><strong>Nội dung cảnh báo</strong><p>SMS bao gồm thời điểm phát hiện và yêu cầu người nhận kiểm tra ngay.</p></div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="page" data-page="system">
+          <div class="page-intro"><div><span class="overline">CẤU HÌNH & TRẠNG THÁI</span><h2>Hệ thống và tài khoản</h2><p>Thông tin người dùng, mô hình AI và các dịch vụ đang vận hành.</p></div></div>
+
+          <div class="system-layout">
+            <section class="card account-card">
+              <span class="section-kicker">TÀI KHOẢN</span>
+              <div class="account-identity"><div id="accountAvatar" class="avatar large">FA</div><div><h3 id="accountName">—</h3><p id="accountEmail">—</p></div></div>
+              <div class="detail-list">
+                <div><span>Mã người dùng</span><strong id="accountId">—</strong></div>
+                <div><span>Ngày tạo tài khoản</span><strong id="accountCreated">—</strong></div>
+                <div><span>Quyền truy cập</span><strong>Quản trị hệ thống</strong></div>
+              </div>
+              <button id="accountLogoutBtn" class="button secondary wide" type="button"><svg><use href="#i-logout"></use></svg>Đăng xuất khỏi tài khoản</button>
+            </section>
+
+            <section class="card system-card">
+              <div class="card-head"><div><span class="section-kicker">DỊCH VỤ</span><h3>Tình trạng vận hành</h3></div><span class="live-dot"><i></i> ONLINE</span></div>
+              <div class="service-list">
+                <div><span class="service-icon blue"><svg><use href="#i-eye"></use></svg></span><div><strong>YOLO11n-Pose</strong><small>Phát hiện người và 17 keypoint</small></div><b id="systemPose">—</b></div>
+                <div><span class="service-icon violet"><svg><use href="#i-chip"></use></svg></span><div><strong>Mô hình GRU</strong><small>Phân loại tư thế và sự kiện</small></div><b id="systemGru">—</b></div>
+                <div><span class="service-icon green"><svg><use href="#i-message"></use></svg></span><div><strong>Dcom SMS</strong><small>Dịch vụ gửi cảnh báo khẩn cấp</small></div><b id="systemSms">—</b></div>
+                <div><span class="service-icon blue"><svg><use href="#i-camera"></use></svg></span><div><strong>Camera máy chủ</strong><small id="systemCameraSource">USB/RTSP do backend quản lý</small></div><b id="systemCamera">—</b></div>
+                <div><span class="service-icon amber"><svg><use href="#i-history"></use></svg></span><div><strong>SQLite</strong><small>Lưu tài khoản và lịch sử cảnh báo</small></div><b class="service-ok">Hoạt động</b></div>
+              </div>
+            </section>
+          </div>
+
+          <section class="card model-info-card">
+            <div><span class="section-kicker">CẤU HÌNH AI</span><h3>Thông số suy luận hiện tại</h3></div>
+            <div class="model-specs">
+              <div><span>Đầu vào Pose</span><strong>512 px</strong></div>
+              <div><span>Chuỗi GRU</span><strong>24 frame</strong></div>
+              <div><span>Tốc độ lấy mẫu</span><strong id="systemFps">8 FPS</strong></div>
+              <div><span>Vector đặc trưng</span><strong>92 chiều</strong></div>
+              <div><span>Keypoint tối thiểu</span><strong>7 / 17</strong></div>
+              <div><span>Ngưỡng cảnh báo</span><strong>0,50</strong></div>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+  </section>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
